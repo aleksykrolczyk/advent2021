@@ -8,9 +8,9 @@ PAIRS = {'(': ')', '[': ']', '{': '}', '<': '>'}
 def part1(nav: list[str]) -> (int, list[list[str]]):
     illegals: list[str] = []
     incomplete: list[list[str]] = []
-    add_to_incomplete = True
     for line in nav:
         history: list[str] = []
+        add_to_incomplete = True
         for char in line:
             if char in OPENING:
                 history.append(char)
@@ -21,7 +21,7 @@ def part1(nav: list[str]) -> (int, list[list[str]]):
                     break
         if add_to_incomplete:
             incomplete.append(history)
-        add_to_incomplete = True
+
     return sum(SCORES_ERRORS[x] for x in illegals), incomplete
 
 
@@ -42,6 +42,5 @@ with open('input', 'r') as file:
     nav = [line.strip() for line in file]
 
 scores_errors, to_complete = part1(nav)
-print(to_complete)
 print(f'{scores_errors}')
 print(f'{part2(to_complete)=}')
